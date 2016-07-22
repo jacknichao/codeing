@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-
 /**
  * Created by Administrator on 2016/7/19.
  * 题目描述
@@ -17,30 +13,37 @@ public class RebuildBinTree {
         if(pre==null||in==null){
             return null;
         }
-
-        java.util.HashMap<Integer,Integer> map= new java.util.HashMap<Integer, Integer>();
+        //空间换时间，两次遍历之后，找到元素在中序中的未知索引
+        int maxVaue=Integer.MIN_VALUE;
+        for(int n:in){
+            if(n>maxVaue) maxVaue=n;
+        }
+        int[] indexArr=new int[maxVaue+1];
         for(int i=0;i<in.length;i++){
-            map.put(in[i],i);
+            indexArr[in[i]]=i;
+
         }
 
-        return construct(pre,0,pre.length-1,in,0,in.length-1,map);
+        return construct(pre,0,pre.length-1,in,0,in.length-1,indexArr);
 
     }
 
-    public  TreeNode construct(int[] pre, int pl, int pr, int[] in , int il, int ir, HashMap<Integer,Integer> map){
+    public  TreeNode construct(int[] pre, int pl, int pr, int[] in , int il, int ir, int[] indexArr){
         if(pl>pr){
             return null;
         }
 
         TreeNode root =new TreeNode(pre[pl]);
-        int index=map.get(pre[pl]);
+        int index=indexArr[pre[pl]];
 
-        root.left=construct(pre,pl+1,pl+index-il,in,il,index-1,map);
-
-        root.right=construct(pre,pl+index-il+1,pr,in,index+1,ir,map);
+        root.left=construct(pre,pl+1,pl+index-il,in,il,index-1,indexArr);
+        root.right=construct(pre,pl+index-il+1,pr,in,index+1,ir,indexArr);
 
         return root;
     }
+
+
+
 
 
 

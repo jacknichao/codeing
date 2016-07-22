@@ -10,21 +10,16 @@ public class MergeList {
     }
 
     public ListNode Merge(ListNode list1,ListNode list2) {
-        ListNode l1=list1;
-        ListNode l1_last=list1;
-
-        ListNode l2=list2;
-        while(l1!=null&& l2!=null){
-            if(l1.val<l2.val){
-                l1_last=l1;
-                l1=l1.next;
-                continue;
-            }
-
-            l1_last.next=l2;
-
-
+        if(list1==null) return list2;
+        if(list2==null) return list1;
+        ListNode pMergeHead=null;
+        if(list1.val<=list2.val){
+            pMergeHead=list1;
+            pMergeHead.next=Merge(list1.next,list2);
+        }else{
+            pMergeHead=list2;
+            pMergeHead.next=Merge(list1,list2.next);
         }
-
+        return pMergeHead;
     }
 }

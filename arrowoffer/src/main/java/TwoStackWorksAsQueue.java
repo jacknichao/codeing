@@ -1,4 +1,3 @@
-import java.util.Collections;
 import java.util.Stack;
 
 /**
@@ -16,18 +15,15 @@ public class TwoStackWorksAsQueue {
     Stack<Integer> stack2 = new Stack<Integer>();
 
     public void push(int node) {
-        while(!stack2.isEmpty()){
-            stack1.push(stack2.pop());
-        }
         stack1.push(node);
-
     }
 
     public int pop() {
         int value=-1;
-        while(!stack1.isEmpty()){
-            stack2.push(stack1.pop());
-        }
+        if(stack2.isEmpty())
+            while(!stack1.isEmpty()){
+                stack2.push(stack1.pop());
+            }
         value=stack2.pop();
         return value;
     }
