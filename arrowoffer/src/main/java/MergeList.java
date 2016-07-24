@@ -6,6 +6,27 @@
  */
 public class MergeList {
     public static void main(String[] args) {
+        ListNode l1=new ListNode(5);
+        ListNode l21=new ListNode(1);
+        ListNode l22=new ListNode(3);
+        l21.next=l22;
+        ListNode l23=new ListNode(4);
+        l22.next=l23;
+
+        new MergeList().showList(l1);
+        new MergeList().showList(l21);
+        MergeList mergeList=new MergeList();
+
+
+    }
+
+    public void showList(ListNode listNode){
+        ListNode tmp=listNode;
+        while(tmp!=null){
+            System.out.print(tmp.val+"-->");
+            tmp=tmp.next;
+        }
+        System.out.println();
 
     }
 
@@ -22,4 +43,6 @@ public class MergeList {
         }
         return pMergeHead;
     }
+
+
 }

@@ -17,11 +17,12 @@ public class Permutationnn {
 
     public ArrayList<String> Permutation(String str) {
         if("".equals(str)) return null;
-        return
+        return null;
     }
 
     private ArrayList<String> constructionStr(String str,ArrayList<String> arrayList){
         if("".equals(str)) return arrayList;
+        return null;
 
     }
 

@@ -1,0 +1,5 @@
+#ignore the target directory
+arrowoffer/target/*
+
+#ignore workspace file 
+*.iml
