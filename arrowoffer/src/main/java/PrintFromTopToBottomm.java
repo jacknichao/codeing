@@ -25,6 +25,7 @@ public class PrintFromTopToBottomm {
 
     }
 
+    //该方法在nowcoder中不认
     public ArrayList<Integer> PrintFromTopToBottom(TreeNode root) {
         ArrayList<Integer> elements=new ArrayList<Integer>();
         if(root!=null){
@@ -43,4 +44,19 @@ public class PrintFromTopToBottomm {
         return elements;
     }
 
+    public ArrayList<Integer> PrintFromTopToBottom2(TreeNode root){
+        ArrayList<Integer> arrayList=new ArrayList<Integer>();
+        if(root!=null){
+            ArrayList<TreeNode> treeNodes=new ArrayList<TreeNode>();
+            treeNodes.add(root);
+            while(!treeNodes.isEmpty()){
+                TreeNode node=treeNodes.get(0);
+                arrayList.add(node.val);
+                treeNodes.remove(0);
+                if(node.left!=null) treeNodes.add(node.left);
+                if(node.right!=null) treeNodes.add(node.right);
+            }
+        }
+        return arrayList;
+    }
 }

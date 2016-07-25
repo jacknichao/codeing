@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by root on 7/22/16.
@@ -16,14 +17,30 @@ public class Permutationnn {
     }
 
     public ArrayList<String> Permutation(String str) {
-        if("".equals(str)) return null;
-        return null;
+        ArrayList<String> arrayList=new ArrayList<String>();
+        if(str==null|| str.length()==0) return arrayList;
+        Permutation(str.toCharArray(),0,arrayList);
+        Collections.sort(arrayList);
+        return arrayList;
     }
 
-    private ArrayList<String> constructionStr(String str,ArrayList<String> arrayList){
-        if("".equals(str)) return arrayList;
-        return null;
+    public void Permutation(char[] chs,int index,ArrayList<String> result){
+        if(index==chs.length-1){
+            if(!result.contains(String.valueOf(chs)))result.add(String.valueOf(chs));
+        }else{
 
+            for(int i=index+1;i<chs.length;i++){
+                char t=chs[i];
+                chs[i]=chs[index];
+                chs[index]=t;
+
+                Permutation(chs,index+1,result);
+
+                t=chs[i];
+                chs[i]=chs[index];
+                chs[index]=t;
+            }
+        }
     }
 
 }
