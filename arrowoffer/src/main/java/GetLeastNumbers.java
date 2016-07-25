@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class GetLeastNumbers {
     public static void main(String[] args) {
         int[] arr={4,5,1,6,2,7,3,8};
-        System.out.println(new GetLeastNumbers().GetLeastNumbers_Solution(arr,4));
+        System.out.println(new GetLeastNumbers().GetLeastNumbers_Solution2(arr,5));
 
     }
 
@@ -18,7 +18,45 @@ public class GetLeastNumbers {
     //方法2:使用快速排序的思想，在快排中，partition函数的主要工作就是找个一个数将其放到正确的位置上，并使得它的左边都小于该数，右侧都大于该数
     //并返回正确位置的index，如果这个位置恰好是第k个的话，那么其左边的数字都是小于这个数
     public ArrayList<Integer> GetLeastNumbers_Solution2(int[] input ,int k){
+        ArrayList<Integer> arrayList=new ArrayList<Integer>();
+        if(input==null||input.length<=0||k<=0) return arrayList;
+        if(k>=input.length){
+            for(int n:input)
+                arrayList.add(n);
+        }else{
+            int low=0;
+            int high=input.length-1;
+            int index=Partition(input,low,high);
+            while(index!=k-1){
+                if(index>k-1){
+                    high=index-1;
+                    index=Partition(input,low,high);
+                }else{
+                   low=index+1;
+                    index=Partition(input,low,high);
+                }
+            }
 
+            for(int i=0;i<=index;i++)
+                arrayList.add(input[i]);
+        }
+
+        return arrayList;
+
+
+    }
+
+    public int Partition(int[] arr,int low,int high){
+        int value=arr[low];
+        while(low<high){
+            while(low<high&& arr[high]>value) high--;
+                arr[low]=arr[high];
+
+            while(low<high&& arr[low]<=value) low++;
+                arr[high]=arr[low];
+        }
+        arr[low]=value;
+        return low;
     }
 
 
