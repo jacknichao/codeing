@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -13,6 +14,8 @@ import java.util.Collections;
  */
 public class Permutationnn {
     public static void main(String[] args) {
+        Permutationnn p=new Permutationnn();
+        p.permutation("12345","54321");
 
     }
 
@@ -40,6 +43,59 @@ public class Permutationnn {
                 chs[i]=chs[index];
                 chs[index]=t;
             }
+        }
+    }
+
+
+    //使用字典序完成字符的全排列
+    public void permutation(String str,String end){
+        if(str==null||str.length()<=0) return ;
+
+        char[] chs=str.toCharArray();
+        System.out.println(chs);
+
+        while(!end.equals(new String(chs))){
+            while(nextPermutation(chs)){
+                System.out.println(chs);
+            }
+        }
+    }
+
+    //二找 一交换 一反转
+    public boolean nextPermutation(char[] chs){
+        //一找：找到排列中最后（最右）一个升序的首位位置i
+        int i=-1;
+        for(i=chs.length-2;i>=0&& chs[i]>chs[i+1];i--);
+
+        //表明已经找到所有的排列
+        if(i<0){
+            System.err.println("--------------------------");
+            return false;
+        }
+
+        int j=-1;
+        //二找：找到排列中第i位右边最后一个比ch[i]大的位置j
+        for(j=chs.length-1;j>i&&chs[j]<chs[i];j--);
+
+        //一交换
+        char t=chs[i];
+        chs[i]=chs[j];
+        chs[j]=t;
+
+        //一反转
+        reverse(chs,i+1,chs.length-1);
+        return true;
+    }
+
+
+    //反转制定字符数组区间中的字符
+    public void reverse(char[] chs,int low,int high){
+        while(low<high){
+            char t=chs[low];
+            chs[low]=chs[high];
+            chs[high]=t;
+            high--;
+            low++;
         }
     }
 
